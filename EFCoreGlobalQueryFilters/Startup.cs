@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using EFCoreGlobalQueryFilters.Models;
+using EFCoreGlobalQueryFilters.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +21,11 @@ namespace EFCoreGlobalQueryFilters
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var connection = Configuration["ConnectionString"];
+            services.AddEntityFrameworkSqlServer();
+            services.AddDbContext<PlaylistContext>(options => options.UseSqlServer(connection));
+            services.AddScoped<ITenantProvider, DummyTenantProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
