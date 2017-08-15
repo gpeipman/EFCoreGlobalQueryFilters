@@ -25,6 +25,11 @@ namespace EFCoreGlobalQueryFilters.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Playlist>().HasKey(e => e.Id);
+            modelBuilder.Entity<Playlist>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Song>().HasKey(e => e.Id);
+            modelBuilder.Entity<Song>().HasQueryFilter(e => !e.IsDeleted);
+
             foreach (var type in _entityTypeProvider.GetEntityTypes())
             {
                 var method = SetGlobalQueryMethod.MakeGenericMethod(type);

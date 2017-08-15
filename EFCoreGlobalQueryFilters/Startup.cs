@@ -26,6 +26,7 @@ namespace EFCoreGlobalQueryFilters
             services.AddEntityFrameworkSqlServer();
             services.AddDbContext<PlaylistContext>(options => options.UseSqlServer(connection));
             services.AddScoped<ITenantProvider, DummyTenantProvider>();
+            services.AddScoped<IEntityTypeProvider, DefaultEntityTypeProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

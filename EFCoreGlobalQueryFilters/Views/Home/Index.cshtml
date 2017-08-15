@@ -1,7 +1,27 @@
-﻿@{
-    ViewData["Title"] = "About";
-}
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+﻿@model IEnumerable<Playlist>
 
-<p>Use this area to provide additional information.</p>
+<div class="row">
+    <div class="col-lg-8">
+        <h2>Playlists</h2>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Playlist</th>
+                    <th>Tenant ID</th>
+                    <th>Is deleted</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var playlist in Model)
+                {
+                    <tr>
+                        <td>@playlist.Title</td>
+                        <td>@playlist.TenantId</td>
+                        <td>@playlist.IsDeleted</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
